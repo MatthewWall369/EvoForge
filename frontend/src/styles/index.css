@@ -1,0 +1,341 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #050816;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.glass {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.app-shell {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  padding: 1rem;
+  color: white;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(34, 211, 238, 0.22), transparent 28%),
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.2), transparent 30%),
+    linear-gradient(135deg, #050816 0%, #0f172a 48%, #020617 100%);
+}
+
+.app-shell::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+
+.app-frame {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 0.85rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 1.2rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.workspace {
+  display: grid;
+  min-height: 0;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.85rem;
+}
+
+.side-panel {
+  width: 20rem;
+  min-width: 20rem;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  padding: 1rem;
+}
+
+.side-panel.collapsed {
+  width: 3.25rem;
+  min-width: 3.25rem;
+  padding: 0.75rem 0.55rem;
+}
+
+.side-panel.collapsed .panel-content {
+  display: none;
+}
+
+.panel-rail-label {
+  display: none;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin: 0.5rem auto;
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  color: rgb(125, 211, 252);
+}
+
+.side-panel.collapsed .panel-rail-label {
+  display: block;
+}
+
+.panel-toggle {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgb(226, 232, 240);
+}
+
+.canvas-shell {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(2, 6, 23, 0.68);
+}
+
+.bottom-panel {
+  height: 17rem;
+  min-height: 12rem;
+  transition: height 160ms ease;
+}
+
+.bottom-panel.collapsed {
+  height: 3.4rem;
+  min-height: 3.4rem;
+}
+
+.bottom-panel.collapsed .bottom-content {
+  display: none;
+}
+
+.template-card,
+.layer-card {
+  display: block;
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 0.75rem;
+  text-align: left;
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.template-card:hover,
+.layer-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(34, 211, 238, 0.55);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.empty-state {
+  pointer-events: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 5;
+  width: min(760px, calc(100% - 3rem));
+  transform: translate(-50%, -50%);
+  border-radius: 1.5rem;
+  padding: 1.4rem;
+  text-align: center;
+}
+
+.react-flow__node {
+  border-radius: 18px;
+  animation: neural-breathe 5.5s ease-in-out infinite;
+}
+
+.react-flow__edge-path {
+  stroke: rgba(34, 211, 238, 0.72);
+  stroke-width: 2.4;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 8;
+  animation:
+    dashdraw 0.8s linear infinite,
+    edge-shimmer 2.8s ease-in-out infinite;
+}
+
+.tensor-edge-active .react-flow__edge-path {
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.9));
+  stroke: rgb(103, 232, 249);
+  stroke-width: 4;
+}
+
+.neural-node {
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.neural-node::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.14), transparent 36%);
+  opacity: 0;
+  transform: translateX(-35%);
+  transition: opacity 180ms ease;
+}
+
+.neural-node:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.animate-pulse .neural-node::before {
+  animation: node-scan 800ms ease-in-out infinite;
+  opacity: 1;
+}
+
+.animate-pulse .tensor-indicator div {
+  animation: tensor-flow 620ms linear infinite;
+}
+
+.node-detail {
+  display: none;
+}
+
+.neural-node:hover .node-detail,
+.react-flow__node.selected .node-detail {
+  display: block;
+}
+
+.react-flow__controls {
+  background: rgba(15, 23, 42, 0.74);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.react-flow__controls button {
+  background: transparent;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  color: white;
+}
+
+.toolbar-button,
+.toolbar-button-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.55rem 0.8rem;
+  font-size: 0.8rem;
+  color: rgb(226, 232, 240);
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.toolbar-button {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.toolbar-button-primary {
+  border-color: rgba(34, 211, 238, 0.52);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.28), rgba(168, 85, 247, 0.25));
+  color: white;
+}
+
+.toolbar-button:hover,
+.toolbar-button-primary:hover {
+  transform: translateY(-1px);
+  border-color: rgba(34, 211, 238, 0.65);
+  background-color: rgba(34, 211, 238, 0.12);
+}
+
+.toolbar-button:disabled,
+.toolbar-button-primary:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+@keyframes node-scan {
+  0% {
+    transform: translateX(-45%);
+  }
+  100% {
+    transform: translateX(45%);
+  }
+}
+
+@keyframes tensor-flow {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes neural-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(34, 211, 238, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.12));
+  }
+}
+
+@keyframes edge-shimmer {
+  0%,
+  100% {
+    stroke-opacity: 0.62;
+  }
+  50% {
+    stroke-opacity: 1;
+  }
+}
