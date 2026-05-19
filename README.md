@@ -55,11 +55,9 @@ The Vite app runs on `http://localhost:5173`.
 
 ## Screenshots
 
-Add screenshots or demo images to an `assets/` folder, then reference them here:
+Add screenshots or demo images to an `assets/` folder. This image will show on GitHub when `assets/evoforge-ui.png` exists:
 
-```md
 ![EvoForge screenshot](assets/evoforge-ui.png)
-```
 
 After adding images, commit them with:
 
