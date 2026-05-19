@@ -53,6 +53,22 @@ npm run dev
 
 The Vite app runs on `http://localhost:5173`.
 
+## Screenshots
+
+Add screenshots or demo images to an `assets/` folder, then reference them here:
+
+```md
+![EvoForge screenshot](assets/evoforge-ui.png)
+```
+
+After adding images, commit them with:
+
+```bash
+git add assets README.md
+git commit -m "Add project screenshots"
+git push
+```
+
 ## API
 
 - `GET /health`
